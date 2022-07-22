@@ -40,6 +40,10 @@ div {
   text-align: center;
 }
 
+p{
+  margin-top: 60px;
+}
+
 .jump-trap {
   display: flex;
   justify-content: center;

@@ -12,19 +12,19 @@ const router = new VueRouter({
             path: '/',
             name: 'index',
             redirect: '/home',
-            component: () => import("@/components/home/home")
+            component: () => import("@/views/home/home")
         },
         {
             path: '/home',
             name: 'home',
             meta: { title: "I AM GOD IN MY HTML" },
-            component: () => import("@/components/home/home")
+            component: () => import("@/views/home/home")
         },
         {
             path: '/realHome',
             name: 'realHome',
             meta: { title: "@#% 欢迎光临 %#@" },
-            component: () => import("@/components/home/realHome")
+            component: () => import("@/views/home/realHome")
         },
     ],
 
