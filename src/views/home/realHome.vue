@@ -2,26 +2,24 @@
   <div>
 
     <div class="mainBox">
-      <div class="header">
+      <div class="header" @mousemove="onMousemove" @mouseleave="onMouseleave" :style="{ width:this.width }">
         <img width="64" height="64" src="https://avatars.githubusercontent.com/u/74953343?v=4">
         <div>
           L·Z·H
         </div>
       </div>
-      <div class="sidebarAndMain">
-        <div class="sidebar">
-          <div class="sidebar-list" v-for="(items,index) in itemSons" :key="index">
-            <div class="sidebar-small-list" >
-              <p v-for="(item,key) in items" :key="key">
+      <div class="main">
+
+        <div class="sidebar-list" v-for="(items,index) in itemSons" :key="index">
+          <div class="sidebar-small-list">
+            <p class="list-p" @click="changClass($event)" v-for="(item,key) in items" :key="key">
+              <el-card style="height: 500px">
                 {{ item }}
-              </p>
-            </div>
+              </el-card>
+            </p>
           </div>
-
         </div>
-        <div class="main">
 
-        </div>
       </div>
     </div>
 
@@ -40,18 +38,28 @@ export default {
   },
   data() {
     return {
+      width: "10%",
       itemSons: [
-        [1, 3, 8],
-        [7, 5, 6, 4],
-        [],
-        [3, 4],
-        [1, 0, 3],
-        [8, 2, 6],
-        [9],
+        ['', '', '', ''],
+        ['', '', ''],
+        ['', '', '', ''],
+        [''],
+        ['', '', ''],
+        ['', ''],
       ]
     }
   },
-  methods: {}
+  methods: {
+    changClass(event) {
+      console.log(event)
+    },
+    onMousemove() {
+      this.width= "100%"
+    },
+    onMouseleave() {
+      this.width= "10%"
+    }
+  }
 
 
 }
@@ -68,51 +76,47 @@ div {
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .header {
+  display: flex;
   position: fixed;
-  padding: 0 15% 0;
-  width: 100%;
+  justify-content: center;
   align-items: center;
   border-top: 0;
-  border-bottom: bisque solid 1px;
+  border-bottom: bisque solid 3px;
   backdrop-filter: saturate(50%) blur(8px);
+
+  transition: all 0.8s ease;
 }
 
-.sidebarAndMain {
+.main {
+  width: 70%;
   margin-top: 64px;
-}
-
-.sidebar {
   display: flex;
-  height: 897px;
-  width: 20%;
-  align-items: center;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border-right: bisque 1px solid;
-}
-
-.sidebar-list {
-  height: 65px;
-  width: 200px;
-  text-align: left;
-  font-size: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
 }
 
-.sidebar-small-list{
-  display: inline-block;
+.sidebar-list {
+  width: 100%;
+  font-size: 50px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.sidebar-small-list {
+  width: 100%;
+  display: flex;
 }
 
 p {
-  padding-left: 100px;
+  text-align: center;
   width: 100%;
-
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 ::-webkit-scrollbar-button {
