@@ -40,7 +40,7 @@ export default {
       let x1 = img.offsetWidth;//元素的宽度
       let y1 = img.offsetHeight;//元素的高度
       document.querySelector(".word").style.cssText += "will-change: transform";
-      document.querySelector(".word").style.cssText += `transform:perspective(1000px) rotateX(${(x1 / 2 - x) / 40}deg) rotateY(${(y1 / 2 - y) / 40}deg) scale3d(1.1,1.1,1.1)`;
+      document.querySelector(".word").style.cssText += `transform:perspective(1000px) rotateY(${-(x1 - x) / 40}deg) rotateX(${(y1 / 2 - y) / 20}deg) scale3d(1.1,1.1,1.1)`;
     },
     scrollTitle() {
       this.titleMsg = ''
@@ -70,8 +70,7 @@ export default {
   left: 0;
   height: 100%;
   width: 100%;
-
-  background-color: #409EFF;
+  background: -webkit-linear-gradient(318deg, #c7defc 1%,#409EFF,#409EFF, #409EFF);
   color: #fff8ed;
   font-size: 100px;
 

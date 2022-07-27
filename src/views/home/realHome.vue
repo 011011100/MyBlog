@@ -3,15 +3,19 @@
 
     <div class="mainBox">
       <div class="header">
-        <img src="https://avatars.githubusercontent.com/u/74953343?v=4">
+        <img width="64" height="64" src="https://avatars.githubusercontent.com/u/74953343?v=4">
         <div>
           L·Z·H
         </div>
       </div>
       <div class="sidebarAndMain">
-        <div class="sidebar" >
-          <div class="sidebarList" v-for="item in items" :key="item">
-            {{ item }}
+        <div class="sidebar">
+          <div class="sidebar-list" v-for="(items,index) in itemSons" :key="index">
+            <div class="sidebar-small-list" >
+              <p v-for="(item,key) in items" :key="key">
+                {{ item }}
+              </p>
+            </div>
           </div>
 
         </div>
@@ -34,16 +38,20 @@ export default {
   components: {
     RaalHomeAppearance
   },
-  data(){
-    return{
-      items:[
-          1,2,3
+  data() {
+    return {
+      itemSons: [
+        [1, 3, 8],
+        [7, 5, 6, 4],
+        [],
+        [3, 4],
+        [1, 0, 3],
+        [8, 2, 6],
+        [9],
       ]
     }
   },
-  methods: {
-
-  }
+  methods: {}
 
 
 }
@@ -60,25 +68,73 @@ div {
   height: 100%;
   display: flex;
   flex-direction: column;
-
 }
 
 .header {
+  position: fixed;
+  padding: 0 15% 0;
   width: 100%;
   align-items: center;
+  border-top: 0;
+  border-bottom: bisque solid 1px;
+  backdrop-filter: saturate(50%) blur(8px);
 }
 
-.sidebar{
+.sidebarAndMain {
+  margin-top: 64px;
+}
+
+.sidebar {
   display: flex;
-  flex-direction: column;
+  height: 897px;
+  width: 20%;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: bisque 1px solid;
 }
 
-.sidebarList{
-  text-align: center;
-  width: 100%;
-  height: 150px;
+.sidebar-list {
+  height: 65px;
+  width: 200px;
+  text-align: left;
   font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.sidebar-small-list{
+  display: inline-block;
+}
+
+p {
+  padding-left: 100px;
+  width: 100%;
 
 }
 
+::-webkit-scrollbar-button {
+  height: 1px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  background-color: #F5F5F5;
+
+}
 </style>
