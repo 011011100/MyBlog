@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="mainBox">
+    <div class="mainBox" v-show="showMain">
       <div class="header" @mousemove="onMousemove" @mouseleave="onMouseleave" :style="{ width:this.width }">
         <img width="64" height="64" src="https://avatars.githubusercontent.com/u/74953343?v=4">
         <div>
@@ -11,12 +11,10 @@
       <div class="main">
 
         <div class="sidebar-list" v-for="(items,index) in itemSons" :key="index">
-          <div class="sidebar-small-list">
-            <p class="list-p" @click="changClass($event)" v-for="(item,key) in items" :key="key">
-              <el-card style="height: 500px">
-                {{ item }}
-              </el-card>
-            </p>
+          <div class="sidebar-small-list" @click="changClass($event)" v-for="(item,key) in items" :key="key">
+            <el-card>
+              {{ item }}
+            </el-card>
           </div>
         </div>
 
@@ -24,7 +22,9 @@
     </div>
 
     <!--  跳转到该页面的跟动画效果，点击后消失  -->
-    <RaalHomeAppearance></RaalHomeAppearance>
+    <div @click="showMain= true">
+      <RaalHomeAppearance></RaalHomeAppearance>
+    </div>
   </div>
 </template>
 
@@ -39,13 +39,12 @@ export default {
   data() {
     return {
       width: "10%",
+      showMain: false,
       itemSons: [
-        ['', '', '', ''],
-        ['', '', ''],
-        ['', '', '', ''],
-        [''],
-        ['', '', ''],
-        ['', ''],
+        ['helloworld！', 'XD', '你猜', ''],
+        ['', '这是一个让人难受的卡片列表', '(Ю:|||】', '但我猜你没有这么多的精力'],
+        ['(@_@)', '要问为什么', '下面要去让强迫症折磨的地方', ''],
+        ['', '？', '====>', '享受现在吧'],
       ]
     }
   },
@@ -54,10 +53,10 @@ export default {
       console.log(event)
     },
     onMousemove() {
-      this.width= "100%"
+      this.width = "100%"
     },
     onMouseleave() {
-      this.width= "10%"
+      this.width = "10%"
     }
   }
 
@@ -96,11 +95,12 @@ div {
   width: 70%;
   margin-top: 64px;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 .sidebar-list {
-  width: 100%;
+  width: 24.5%;
   font-size: 50px;
   display: flex;
   justify-content: flex-start;
@@ -109,14 +109,16 @@ div {
 
 .sidebar-small-list {
   width: 100%;
+  margin-bottom: 5px;
   display: flex;
+  flex-wrap: wrap;
 }
 
-p {
-  text-align: center;
+.el-card{
+  background: -webkit-linear-gradient(318deg, #7baff3 1%,#409EFF,#409EFF, #409EFF);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
   width: 100%;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 ::-webkit-scrollbar-button {
