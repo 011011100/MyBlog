@@ -12,8 +12,8 @@
       </div>
       <div class="main">
         <div class="sidebar-list" v-for="(items,indexes) in itemSons" :key="indexes">
-          <div class="sidebar-small-list" @mouseenter="changText(indexes,index)" @mouseleave="changBackText"
-               @click="jockClick"
+          <div class="sidebar-small-list" @mousemove="changBeRadius($event)" @mouseenter="changText(indexes,index)" @mouseleave="changBackText,changBackRadius($event)"
+               @click="jockClick( indexes,index)"
                v-for="(item,index) in items" :key="index">
             <el-card>
               {{ item }}
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       itemSons: [
-        ['hello world！', 'XD', '你猜', ''],
+        ['HelloWorld！', 'XD', '你猜', ''],
         ['', '这是一个让人难受的卡片列表', '(Ю:|||】', '但我猜你没有这么多的精力'],
         ['(@_@)', '要问为什么', '下面要去让强迫症折磨的地方', ''],
         ['', '？', '====>', ''],
@@ -53,6 +53,12 @@ export default {
     }
   },
   methods: {
+    changBeRadius(event){
+      event.target.style.borderRadius='50px'
+    },
+    changBackRadius(event){
+      event.target.style.borderRadius='50px'
+    },
     changText(indexes, index) {
       if (indexes === 3 && index === 2) {
         Vue.set(this.itemSons[3], 2, "NEXT")
@@ -68,17 +74,16 @@ export default {
       this.width = "10%"
     },
     delay(i, j) {
-      console.log(2)
-      Vue.set(this.itemSons[i], j, '啊哈'+ <br></br> +'你上当了')
+      Vue.set(this.itemSons[i], j, '啊哈!你上当了!')
     },
-    jockClick() {
-      console.log(1)
-      for (let i = 0; i < this.itemSons.length; i++) {
-        for (let j = 0; j < this.itemSons[i].length; j++) {
-          setTimeout(()=>{
-            this.delay(i, j)
-          } ,(3*i+j)*100 )
-
+    jockClick(indexes, index) {
+      if (indexes === 3 && index === 2) {
+        for (let i = 0; i < this.itemSons.length; i++) {
+          for (let j = 0; j < this.itemSons[i].length; j++) {
+            setTimeout(() => {
+              this.delay(i, j)
+            }, (3 * j + i) * 100)
+          }
         }
       }
     }
@@ -146,9 +151,12 @@ div {
 }
 
 .el-card {
+  border-radius: 10px;
   color: #F5F5F5;
   background: -webkit-linear-gradient(0deg, #8876ff 25%, #5ca6dc);
   width: 100%;
+
+  transition: all 0.8s ease;
 }
 
 </style>
