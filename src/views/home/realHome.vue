@@ -2,16 +2,19 @@
   <div>
 
     <div class="mainBox" v-show="showMain">
-      <div class="header" @mousemove="onMousemove" @mouseleave="onMouseleave" :style="{ width:this.width }">
+      <!--      @mousemove="onMousemove" @mouseleave="onMouseleave"-->
+      <div class="header-placeholder"></div>
+      <div class="header" @mousemove="changHeader" @mouseleave="changBackHeader" :style="{ width:this.width }">
         <img width="64" height="64" src="https://avatars.githubusercontent.com/u/74953343?v=4">
         <div>
           L·Z·H
         </div>
       </div>
       <div class="main">
-
-        <div class="sidebar-list" v-for="(items,index) in itemSons" :key="index">
-          <div class="sidebar-small-list" @click="changClass($event)" v-for="(item,key) in items" :key="key">
+        <div class="sidebar-list" v-for="(items,indexes) in itemSons" :key="indexes">
+          <div class="sidebar-small-list" @mouseenter="changText(indexes,index)" @mouseleave="changBackText"
+               @click="jockClick"
+               v-for="(item,index) in items" :key="index">
             <el-card>
               {{ item }}
             </el-card>
@@ -29,7 +32,8 @@
 </template>
 
 <script>
-import RaalHomeAppearance from "@/components/realHome/raalHomeAppearance";
+import RaalHomeAppearance from "@/components/realHome/realHomeAppearance";
+import Vue from "vue";
 
 export default {
   name: "realHome",
@@ -38,25 +42,45 @@ export default {
   },
   data() {
     return {
-      width: "10%",
-      showMain: false,
       itemSons: [
-        ['helloworld！', 'XD', '你猜', ''],
+        ['hello world！', 'XD', '你猜', ''],
         ['', '这是一个让人难受的卡片列表', '(Ю:|||】', '但我猜你没有这么多的精力'],
         ['(@_@)', '要问为什么', '下面要去让强迫症折磨的地方', ''],
-        ['', '？', '====>', '享受现在吧'],
-      ]
+        ['', '？', '====>', ''],
+      ],
+      width: "10%",
+      showMain: false,
     }
   },
   methods: {
-    changClass(event) {
-      console.log(event)
+    changText(indexes, index) {
+      if (indexes === 3 && index === 2) {
+        Vue.set(this.itemSons[3], 2, "NEXT")
+      }
     },
-    onMousemove() {
+    changBackText() {
+      Vue.set(this.itemSons[3], 2, "====>")
+    },
+    changHeader() {
       this.width = "100%"
     },
-    onMouseleave() {
+    changBackHeader() {
       this.width = "10%"
+    },
+    delay(i, j) {
+      console.log(2)
+      Vue.set(this.itemSons[i], j, '啊哈'+ <br></br> +'你上当了')
+    },
+    jockClick() {
+      console.log(1)
+      for (let i = 0; i < this.itemSons.length; i++) {
+        for (let j = 0; j < this.itemSons[i].length; j++) {
+          setTimeout(()=>{
+            this.delay(i, j)
+          } ,(3*i+j)*100 )
+
+        }
+      }
     }
   }
 
@@ -79,14 +103,21 @@ div {
   align-items: center;
 }
 
+.header-placeholder {
+  width: 100%;
+  height: 64px;
+  position: fixed;
+  backdrop-filter: saturate(50%) blur(8px);
+}
+
 .header {
+  font-weight: bolder;
   display: flex;
   position: fixed;
   justify-content: center;
   align-items: center;
   border-top: 0;
-  border-bottom: bisque solid 3px;
-  backdrop-filter: saturate(50%) blur(8px);
+  border-bottom: #7172cc solid 3px;
 
   transition: all 0.8s ease;
 }
@@ -114,33 +145,10 @@ div {
   flex-wrap: wrap;
 }
 
-.el-card{
-  background: -webkit-linear-gradient(318deg, #7baff3 1%,#409EFF,#409EFF, #409EFF);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
+.el-card {
+  color: #F5F5F5;
+  background: -webkit-linear-gradient(0deg, #8876ff 25%, #5ca6dc);
   width: 100%;
 }
 
-::-webkit-scrollbar-button {
-  height: 1px;
-}
-
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
-  background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-  background-color: #555;
-}
-
-::-webkit-scrollbar {
-  width: 16px;
-  height: 16px;
-  background-color: #F5F5F5;
-
-}
 </style>
