@@ -6,38 +6,23 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d dist -r https://github.com/011011100/MyBlog.git -b gh-pages"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist -r https://github.com/011011100/MyBlog.git -b gh-pages"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "element-ui": "^2.15.9",
+    "core-js": "^3.8.3",
+    "element-plus": "^2.2.11",
     "gh-pages": "^4.0.0",
-    "vue": "^2.6.11",
-    "vue-router": "^3.5.4"
+    "vue": "^3.0.0",
+    "@vue/compat": "^3.1.0",
+    "vue-router": "^4.0.8",
+    "tiny-emitter": "^2.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.15",
-    "@vue/cli-plugin-eslint": "~4.5.15",
-    "@vue/cli-service": "~4.5.15",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
+    "@vue/compiler-sfc": "^3.1.0",
+    "@vue/cli-plugin-babel": "^5.0.6",
+    "@vue/cli-service": "^5.0.6",
+    "@babel/core": "^7.12.16"
   },
   "browserslist": [
     "> 1%",
