@@ -1,25 +1,6 @@
-<template>
-  <div @mousemove="watchMyMouse">
-    <div @click="show = !show" style="display: flex; width: 100%; height: 100%">
-      <transition name="el-fade-in-linear" mode="in-out">
-        <div v-show="show" class="transition-box">
-          <div class="word">
-            <b>
-              WELCOME TO MY<br />
-              <div class="countryColor">
-                <span class="country">COUNTRY</span>
-              </div>
-            </b>
-          </div>
-        </div>
-      </transition>
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
-  name: 'realHomeAppearance',
+  name: 'RealHomeAppearance',
   data() {
     return {
       randomList: ['#', '@', '$', '%', '^', '?', '&', '*', '!', '0'],
@@ -32,16 +13,19 @@ export default {
     this.show = !this.show
     this.changTitle()
   },
+  beforeUnmount() {
+    window.clearInterval()
+  },
   methods: {
     watchMyMouse(e) {
-      let x = e.offsetX //相对元素的X偏移量
-      let y = e.offsetY //相对元素的Y偏移量
-      let img = document.querySelector('.word')
-      let x1 = img.offsetWidth //元素的宽度
-      let y1 = img.offsetHeight //元素的高度
+      const x = e.offsetX // 相对元素的X偏移量
+      const y = e.offsetY // 相对元素的Y偏移量
+      const img = document.querySelector('.word')
+      const x1 = img.offsetWidth // 元素的宽度
+      const y1 = img.offsetHeight // 元素的高度
       document.querySelector('.word').style.cssText += 'will-change: transform'
       document.querySelector(
-        '.word'
+        '.word',
       ).style.cssText += `transform:perspective(1000px) rotateY(${
         -(x1 - x) / 40
       }deg) rotateX(${(y1 / 2 - y) / 20}deg) scale3d(1.1,1.1,1.1)`
@@ -50,9 +34,8 @@ export default {
       this.titleMsg = ''
       for (let i = 0; i < 6; i++) {
         this.titleMsg += this.randomList[Math.floor(Math.random() * 10)]
-        if (i === 2) {
+        if (i === 2)
           this.titleMsg += ' 欢迎光临 '
-        }
       }
       document.title = this.titleMsg
     },
@@ -60,11 +43,27 @@ export default {
       setInterval(this.scrollTitle, 200)
     },
   },
-  beforeUnmount() {
-    window.clearInterval()
-  },
 }
 </script>
+
+<template>
+  <div @mousemove="watchMyMouse">
+    <div style="display: flex; width: 100%; height: 100%" @click="show = !show">
+      <transition name="el-fade-in-linear" mode="in-out">
+        <div v-show="show" class="transition-box">
+          <div class="word">
+            <b>
+              WELCOME TO MY<br>
+              <div class="countryColor">
+                <span class="country">COUNTRY</span>
+              </div>
+            </b>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 ::v-deep .transition-box {

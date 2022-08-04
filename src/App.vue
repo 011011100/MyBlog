@@ -1,16 +1,16 @@
+<script>
+export default {}
+</script>
+
 <template>
   <div id="app">
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="in-out" appear>
-        <component :is="Component"></component>
+        <component :is="Component" />
       </transition>
     </router-view>
   </div>
 </template>
-
-<script>
-export default {}
-</script>
 
 <style>
 #app {

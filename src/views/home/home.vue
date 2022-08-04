@@ -1,23 +1,6 @@
-<template>
-  <div>
-    <p>
-      这是我独立完成的第一个html页面，很普通。<br />
-      但是我希望我以后可以继续完善它<br />
-    </p>
-    <div class="jump-trap" @click="jumpReal">
-      <transition name="el-fade-in-linear">
-        <p @mouseenter="this.changShow" v-show="show">NEXT</p>
-      </transition>
-      <transition name="el-fade-in-linear">
-        <p @mouseleave="this.changShow" v-show="!show">====></p>
-      </transition>
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
-  name: 'home',
+  name: 'Home',
   data() {
     return {
       show: true,
@@ -33,6 +16,27 @@ export default {
   },
 }
 </script>
+
+<template>
+  <div>
+    <p>
+      这是我独立完成的第一个html页面，很普通。<br>
+      但是我希望我以后可以继续完善它<br>
+    </p>
+    <div class="jump-trap" @click="jumpReal">
+      <transition name="el-fade-in-linear">
+        <p v-show="show" @mouseenter="changShow">
+          NEXT
+        </p>
+      </transition>
+      <transition name="el-fade-in-linear">
+        <p v-show="!show" @mouseleave="changShow">
+          ====>
+        </p>
+      </transition>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 div {
