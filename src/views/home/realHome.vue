@@ -1,56 +1,8 @@
-<template>
-  <div>
-    <div class="mainBox" v-show="showMain">
-      <!--      @mousemove="onMousemove" @mouseleave="onMouseleave"-->
-      <div class="header-placeholder"></div>
-      <div
-        class="header"
-        @mousemove="changHeader"
-        @mouseleave="changBackHeader"
-        :style="{ width: this.width }"
-      >
-        <img
-          width="64"
-          height="64"
-          src="https://avatars.githubusercontent.com/u/74953343?v=4"
-        />
-        <div>L·Z·H</div>
-      </div>
-      <div class="main">
-        <div
-          class="sidebar-list"
-          v-for="(items, indexes) in itemSons"
-          :key="indexes"
-        >
-          <div
-            class="sidebar-small-list"
-            @mousemove="changBeRadius($event)"
-            @mouseenter="changText(indexes, index)"
-            @mouseleave="changBackText, changBackRadius($event)"
-            @click="jockClick(indexes, index)"
-            v-for="(item, index) in items"
-            :key="index"
-          >
-            <el-card>
-              {{ item }}
-            </el-card>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--  跳转到该页面的跟动画效果，点击后消失  -->
-    <div @click="showMain = true">
-      <RaalHomeAppearance></RaalHomeAppearance>
-    </div>
-  </div>
-</template>
-
 <script>
 import RaalHomeAppearance from '@/components/realHome/realHomeAppearance'
 
 export default {
-  name: 'realHome',
+  name: 'RealHome',
   components: {
     RaalHomeAppearance,
   },
@@ -79,9 +31,8 @@ export default {
       event.target.style.borderRadius = '50px'
     },
     changText(indexes, index) {
-      if (indexes === 3 && index === 2) {
+      if (indexes === 3 && index === 2)
         this.itemSons[3][2] = 'NEXT'
-      }
     },
     changBackText() {
       this.itemSons[3][2] = '====>'
@@ -109,6 +60,54 @@ export default {
   },
 }
 </script>
+
+<template>
+  <div>
+    <div v-show="showMain" class="mainBox">
+      <!--      @mousemove="onMousemove" @mouseleave="onMouseleave"-->
+      <div class="header-placeholder" />
+      <div
+        class="header"
+        :style="{ width: width }"
+        @mousemove="changHeader"
+        @mouseleave="changBackHeader"
+      >
+        <img
+          width="64"
+          height="64"
+          src="https://avatars.githubusercontent.com/u/74953343?v=4"
+        >
+        <div>L·Z·H</div>
+      </div>
+      <div class="main">
+        <div
+          v-for="(items, indexes) in itemSons"
+          :key="indexes"
+          class="sidebar-list"
+        >
+          <div
+            v-for="(item, index) in items"
+            :key="index"
+            class="sidebar-small-list"
+            @mousemove="changBeRadius($event)"
+            @mouseenter="changText(indexes, index)"
+            @mouseleave="changBackText, changBackRadius($event)"
+            @click="jockClick(indexes, index)"
+          >
+            <el-card>
+              {{ item }}
+            </el-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  跳转到该页面的跟动画效果，点击后消失  -->
+    <div @click="showMain = true">
+      <RaalHomeAppearance />
+    </div>
+  </div>
+</template>
 
 <style scoped>
 div {
