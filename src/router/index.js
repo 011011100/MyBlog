@@ -1,4 +1,3 @@
-import * as Vue from 'vue'
 import * as VueRouter from 'vue-router'
 import home from '@/views/home/home'
 import realHome from '@/views/home/realHome'
