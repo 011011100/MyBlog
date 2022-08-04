@@ -1,9 +1,9 @@
-import * as VueRouter from 'vue-router'
+import {createRouter,createWebHashHistory} from 'vue-router'
 import home from '@/views/home/home'
 import realHome from '@/views/home/realHome'
 
-const router = VueRouter.createRouter({
-  history: VueRouter.createWebHashHistory(),
+const router = createRouter({
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
